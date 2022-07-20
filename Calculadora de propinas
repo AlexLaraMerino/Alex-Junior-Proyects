@@ -1,0 +1,54 @@
+'''
+Calculadora de propinas
+
+Funciones:
+    1. 3 porcentajes a elegir: 18, 20 y 25%
+    2. Conteplar el total de personas involucradas y dividir la propina equitativamente
+    3. En caso de querer, se podrá dividir la propina en las proporciones que guste
+
+'''
+
+def calculadoraDePropinas(cuenta):
+    while True:
+        porcentaje = int(input('Elija el porcentaje de propina que desea dejar entre 18%, 20% o 25% (ingrese solo el número) '))
+        try:
+            if porcentaje == 18:
+                propina = cuenta*0.18
+                print(f'La propina es de {propina}€')
+                return propina
+            elif porcentaje == 20:
+                propina = cuenta*0.20
+                print(f'La propina es de {propina}€')  
+                return propina
+            elif porcentaje == 25:
+                propina = cuenta*0.25
+                print(f'La propina es de {propina}€')
+                return propina
+            else:
+                print('Introduce un porcentaje válido')
+        except Exception as ex:
+            print('Tipo de dato incorrecto')
+
+def personasComensales():
+    while True:
+        try:
+            entero = int(input('¿Entre cuantas personas se va a dividir la cuenta? '))
+            return entero
+        except ValueError:
+            print('Eso no es un número. Inténtalo de nuevo')
+
+def dividirPropina(propina, personas):
+    si_no = input('¿Quieres dividir la propina equitativamente? ')
+    if si_no == "si":
+        print(f'Cada persona ha de pagar {round(propina/personas, 2)}')
+    else: 
+        porcentajes = input('¿Qué porcentajes deseas que pague cada comensal? Escribe separando por espacios ')
+        porcentajes = [int(porcentaje) for porcentaje in porcentajes.split(" ")]
+        for i in range(personas):
+            print(f'El comensal número {i} ha de pagar {round(propina*(porcentajes[i]/100),2)}€')
+
+
+cuenta = float(input('¿Cuanto ha costado la comida? '))
+propina = calculadoraDePropinas(cuenta)
+personas = personasComensales()
+dividirPropina(propina, personas)
