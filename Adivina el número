@@ -1,0 +1,73 @@
+'''
+Adivina el número 
+
+En este juego la máquina elegirá un número entre n y n+50, y nosotros tendremos que adivinarlo en i intentos.
+
+Deberá cubrir la entrada de datos incorrectos con fuciones que prevengan las excepciones que se puedan ocasionar.
+'''
+import random
+
+def validar2():
+    while True:
+        try:
+            data = int(input(f'Dime un número: '))
+            return data
+        except ValueError:
+            print('El dato debe de ser un número')
+
+def validar1(user1):
+    while True:
+        try:
+            data = int(input(f'Hola {user1}! Ahora dime un número: '))
+            return data
+        except ValueError:
+            print('El dato debe de ser un número')
+
+def validar(rango):
+    while True:
+        data = validar2()
+        if rango <= data <= rango+50:
+            try:
+                return data
+            except ValueError:
+                print('El dato debe de ser un número')
+        else:
+            print('El número está fuera del rango')
+        
+
+
+def adivinaElNumero():
+    bienvenida = 'Bienvenido'.center(30, "-")
+    print(bienvenida)
+    user1 = input('Dime tu nombre: ')
+    rango = validar1(user1)
+    print(f'Muy bien, estoy pensando un número entre {rango} y {rango+50}')
+    print('A ver si puedes adivinarlo en menos de 6 intentos')
+    print("")
+    n_máquina = random.randint(rango, rango+50)
+    intentos = 0
+
+    while intentos < 6:
+        n = validar(rango)
+        if n == n_máquina:
+            print('Has acertado!')
+            intentos+=1
+            print(f'Has acertado en {intentos} intentos')
+        elif n < n_máquina:
+            print('Muy bajo')
+            print(f'Te quedan {5-intentos} intentos')
+            intentos+=1          
+        else:
+            print('Muy alto')
+            print(f'Te quedan {5-intentos} intentos')
+            intentos+=1
+
+    print(f'El número total de intentos ha sido {intentos}')
+    print(" ")
+    despedida = 'Fin del juego'.center(30, "-")
+    volver_a_jugar = int(input('·Pulsa cualquier número para continuar jugando \n·Pulsa 0 para abandonar el juego \n'))
+    while volver_a_jugar != 0:
+        return adivinaElNumero()       
+
+
+adivinaElNumero()
