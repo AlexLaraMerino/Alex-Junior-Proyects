@@ -51,7 +51,7 @@ def partida():
     while movimiento1 not in movimientos_posibles:
         print('Eso no está entre las opciones puto')
         movimiento1 = input('Elige entre piedra, papel o tijeras: ').lower()
-    # Usamos el método .choice() del módulo random para que la máuiqna eliga aleatoriamente entre las opciones
+    # Usamos el método .choice() del módulo random para que la máquina elija aleatoriamente entre las opciones
     movimiento2 = random.choice(movimientos_posibles)
     print(" ")
     print("--------------------------------------")
@@ -61,6 +61,7 @@ def partida():
     print('¿Quieres volver a jugar? ')
     print(" ")
     volver_a_jugar = int(input('·Pulsa cualquier número para continuar jugando \n·Pulsa 0 para abandonar el juego \n'))
+    # Fallo al no usar el manejo de excepciones para evitar que el programa crashee si introducimos mal esta varibale...
     while volver_a_jugar != 0:
         return partida()        # Con este último tramo de código incurrimos en la recursividad para volver a jugar
 
